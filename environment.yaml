@@ -1,0 +1,39 @@
+name: investment-portfolio-analytics
+
+channels:
+    - conda-forge
+    - defaults
+
+dependencies:
+    - python=3.12
+
+    # Core Data Analysis
+    - pandas
+    - numpy
+
+    # Visualization
+    - matplotlib
+    - seaborn
+    - plotly
+
+    # Statistics
+    - scipy
+    - statsmodels
+
+    # Jupyter
+    - jupyter
+    - notebook
+    - ipykernel
+
+    # Utilities
+    - openpyxl
+    - tqdm
+
+    # Pip Packages
+    - pip
+
+    - pip:
+          - yfinance
+          - missingno
+          - tabulate
+          - PyPortfolioOpt
