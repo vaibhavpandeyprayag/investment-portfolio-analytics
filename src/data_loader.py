@@ -20,13 +20,18 @@ def download_ticker_data(ticker: str, start_date: str, end_date: str) -> pd.Data
                 f"No data returned for ticker: {ticker}"
             )
 
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+
         df = df.reset_index()
+        df["Ticker"] = ticker
+        df = df[["Date", "Ticker", "Open", "High", "Low", "Close", "Volume"]]
 
         print(
             f"[SUCCESS] {ticker}: "
             f"{len(df):,} rows downloaded."
         )
-
+        
         return df
 
     except Exception as ex:
@@ -102,8 +107,11 @@ def download_benchmark_data() -> None:
                 f"Benchmark download failed for {BENCHMARK}"
             )
 
+        if isinstance(benchmark_df.columns, pd.MultiIndex):
+            benchmark_df.columns = benchmark_df.columns.get_level_values(0)
+        benchmark_df.drop(columns="Ticker", inplace=True)
+        
         output_file = DATA_DIR / "benchmark_data.csv"
-
         benchmark_df.to_csv(output_file, index=False)
 
         print(f"\n[SUCCESS] Benchmark data saved to:")
