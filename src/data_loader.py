@@ -120,3 +120,11 @@ def download_benchmark_data() -> None:
     except Exception as ex:
         print(f"[ERROR] Benchmark download failed: {ex}")
         raise
+
+def main():
+    download_stock_data()
+    download_benchmark_data()
+
+
+if __name__ == "__main__":
+    main()
